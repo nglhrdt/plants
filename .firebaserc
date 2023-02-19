@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "plants-45853": {
+      "hosting": {
+        "plants": [
+          "plants-45853"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "plants-45853"
+  }
+}
