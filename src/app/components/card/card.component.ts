@@ -8,5 +8,5 @@ import { Component, HostBinding } from '@angular/core';
   template: `<ng-content></ng-content>`,
 })
 export class CardComponent {
-  @HostBinding('class') cssClasses = 'rounded p-4 bg-primary dark:bg-primary';
+  @HostBinding('class') cssClasses = 'block rounded p-4 bg-primary dark:bg-primary';
 }

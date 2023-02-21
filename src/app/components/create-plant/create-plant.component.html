@@ -1,0 +1,29 @@
+<app-card>
+  <div>New Plant</div>
+  <form
+    [formGroup]="plantForm"
+    (ngSubmit)="create()"
+  >
+    <label for="species">Species: </label>
+    <input
+      id="species"
+      type="text"
+      formControlName="species"
+      autofocus
+      autocomplete="off"
+    />
+    <div class="flex gap-4 mt-4">
+      <input
+        class="cursor-pointer"
+        type="button"
+        value="Cancel"
+        routerLink="/plants"
+      />
+      <input
+        class="cursor-pointer"
+        type="submit"
+        value="Create"
+      />
+    </div>
+  </form>
+</app-card>

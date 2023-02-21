@@ -1,0 +1,11 @@
+form {
+  @apply flex flex-col pt-4;
+
+  label {
+    @apply block mb-1;
+  }
+
+  input {
+    @apply block rounded p-2 bg-primary-dark;
+  }
+}
