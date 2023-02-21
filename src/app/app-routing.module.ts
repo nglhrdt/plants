@@ -9,12 +9,18 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'home',
+    redirectTo: 'plants',
   },
   {
-    path: 'home',
-    loadComponent: () => import('./components/home/home.component').then((c) => c.HomeComponent),
+    path: 'plants',
+    loadComponent: () => import('./components/plants/plants.component').then((c) => c.PlantsComponent),
     ...canActivate(redirectUnauthorizedToLogin),
+    children: [
+      {
+        path: 'new',
+        loadComponent: () => import('./components/create-plant/create-plant.component').then((c) => c.CreatePlantComponent),
+      },
+    ],
   },
   {
     path: 'login',
