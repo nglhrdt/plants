@@ -22,7 +22,7 @@ export class CreatePlantComponent {
   create(): void {
     const species = this.plantForm.value.species;
     if (species) {
-      this.plantService.createPlant(species).then(() => this.router.navigate(['plants']));
+      this.plantService.createPlant({ species, plantDate: new Date() }).then(() => this.router.navigate(['plants']));
     }
   }
 }
