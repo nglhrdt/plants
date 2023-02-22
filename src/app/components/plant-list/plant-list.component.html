@@ -1,0 +1,12 @@
+<ng-container *ngIf="plants$ | async as plants">
+  <ul *ngIf="plants.length; else noPlants">
+    <li
+      *ngFor="let plant of plants"
+      class="cursor-pointer"
+    >
+      {{ plant.species }} - {{ plant.plantDate | date : "shortDate" }}
+    </li>
+  </ul>
+</ng-container>
+
+<ng-template #noPlants>Create Plants to begin</ng-template>

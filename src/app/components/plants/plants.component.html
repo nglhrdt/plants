@@ -2,6 +2,10 @@
   <app-button routerLink="/plants/new">New Plant</app-button>
   <app-logout></app-logout>
 </div>
-<div class="p-4">
-  <router-outlet></router-outlet>
+
+<div class="p-4 grid grid-cols-2 gap-4">
+  <app-plant-list></app-plant-list>
+  <div class="grow">
+    <router-outlet></router-outlet>
+  </div>
 </div>
