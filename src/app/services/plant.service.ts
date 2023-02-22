@@ -4,6 +4,8 @@ import {
   addDoc,
   collection,
   collectionData,
+  deleteDoc,
+  doc,
   DocumentData,
   DocumentReference,
   Firestore,
@@ -47,6 +49,10 @@ export class PlantService {
     };
 
     return addDoc(collection(this.firestore, PLANTS_COLLECTION_NAME), data);
+  }
+
+  deletePlant(plant: Plant): Promise<void> {
+    return deleteDoc(doc(this.firestore, `${PLANTS_COLLECTION_NAME}/${plant.id}`));
   }
 }
 

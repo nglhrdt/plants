@@ -2,9 +2,15 @@
   <ul *ngIf="plants.length; else noPlants">
     <li
       *ngFor="let plant of plants"
-      class="cursor-pointer"
+      class="flex gap-4 items-center"
     >
       {{ plant.species }} - {{ plant.plantDate | date : "shortDate" }}
+      <app-button
+        class="cursor-pointer"
+        (click)="plantService.deletePlant(plant)"
+      >
+        Delete
+      </app-button>
     </li>
   </ul>
 </ng-container>
