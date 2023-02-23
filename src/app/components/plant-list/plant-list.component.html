@@ -1,18 +1,20 @@
-<ng-container *ngIf="plants$ | async as plants">
-  <ul *ngIf="plants.length; else noPlants">
-    <li
-      *ngFor="let plant of plants"
-      class="flex gap-4 items-center"
-    >
-      {{ plant.species }} - {{ plant.plantDate | date : "shortDate" }}
-      <app-button
-        class="cursor-pointer"
-        (click)="plantService.deletePlant(plant)"
-      >
-        Delete
-      </app-button>
-    </li>
-  </ul>
-</ng-container>
+<app-card>
+  <div class="flex pb-4">
+    <app-button routerLink="/plants/new">New Plant</app-button>
+  </div>
 
-<ng-template #noPlants>Create Plants to begin</ng-template>
+  <ng-container *ngIf="plants$ | async as plants">
+    <ul *ngIf="plants.length; else noPlants">
+      <li
+        *ngFor="let plant of plants"
+        class="cursor-pointer px-2 py-1 rounded"
+        routerLink="/plants/{{ plant.id }}"
+        routerLinkActive="bg-primary-dark"
+      >
+        {{ plant.species }} - {{ plant.plantDate | date : "shortDate" }}
+      </li>
+    </ul>
+  </ng-container>
+
+  <ng-template #noPlants>Create Plants to begin</ng-template>
+</app-card>

@@ -8,5 +8,5 @@ import { Component, HostBinding } from '@angular/core';
   templateUrl: './button.component.html',
 })
 export class ButtonComponent {
-  @HostBinding('class') cssClasses = 'flex';
+  @HostBinding('class') cssClasses = 'flex cursor-pointer';
 }

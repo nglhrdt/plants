@@ -20,6 +20,10 @@ const routes: Routes = [
         path: 'new',
         loadComponent: () => import('./components/create-plant/create-plant.component').then((c) => c.CreatePlantComponent),
       },
+      {
+        path: ':id',
+        loadComponent: () => import('./components/plant-details/plant-details.component').then((c) => c.PlantDetailsComponent),
+      },
     ],
   },
   {
