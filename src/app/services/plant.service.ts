@@ -6,6 +6,7 @@ import {
   collectionData,
   deleteDoc,
   doc,
+  docData,
   DocumentData,
   DocumentReference,
   Firestore,
@@ -14,8 +15,9 @@ import {
   QueryDocumentSnapshot,
   serverTimestamp,
   Timestamp,
+  where,
 } from '@angular/fire/firestore';
-import { orderBy } from '@firebase/firestore';
+import { FieldValue, orderBy } from '@firebase/firestore';
 import { Observable } from 'rxjs';
 
 export interface NewPlantData {
@@ -37,10 +39,14 @@ export class PlantService {
 
   getPlants$(): Observable<Plant[]> {
     const plantsCollection = collection(this.firestore, PLANTS_COLLECTION_NAME).withConverter(plantConverter);
-    return collectionData(query(plantsCollection, orderBy('plantDate', 'desc')), { idField: 'id' });
+    return collectionData(query(plantsCollection, where('userId', '==', this.auth.currentUser?.uid), orderBy('plantDate', 'desc')), { idField: 'id' });
   }
 
-  createPlant(newPlantData: NewPlantData): Promise<DocumentReference> {
+  getPlantById$(plantId: string): Observable<Plant> {
+    return docData(doc(this.firestore, `${PLANTS_COLLECTION_NAME}/${plantId}`).withConverter(plantConverter), { idField: 'id' });
+  }
+
+  createPlant(newPlantData: NewPlantData): Promise<string> {
     const data = {
       species: newPlantData.species,
       plantDate: newPlantData.plantDate,
@@ -48,7 +54,7 @@ export class PlantService {
       createdAt: serverTimestamp(),
     };
 
-    return addDoc(collection(this.firestore, PLANTS_COLLECTION_NAME), data);
+    return addDoc(collection(this.firestore, PLANTS_COLLECTION_NAME), data).then(ref => ref.id);
   }
 
   deletePlant(plant: Plant): Promise<void> {
@@ -56,7 +62,7 @@ export class PlantService {
   }
 }
 
-export const plantConverter: FirestoreDataConverter<Plant> = {
+const plantConverter: FirestoreDataConverter<Plant> = {
   toFirestore(plant: Plant): DocumentData {
     return { ...plant };
   },

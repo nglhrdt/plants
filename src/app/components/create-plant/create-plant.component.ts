@@ -17,12 +17,18 @@ export class CreatePlantComponent {
     species: new FormControl(''),
   });
 
+  private sending: boolean = false;
+
   constructor(private router: Router, private plantService: PlantService) {}
 
   create(): void {
     const species = this.plantForm.value.species;
-    if (species) {
-      this.plantService.createPlant({ species, plantDate: new Date() }).then(() => this.router.navigate(['plants']));
+    if (species && !this.sending) {
+      this.sending = true
+      this.plantService
+        .createPlant({ species, plantDate: new Date() })
+        .then((createdId: string) => this.router.navigate(['plants', createdId]))
+        .catch(() => this.sending = false);
     }
   }
 }
