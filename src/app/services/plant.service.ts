@@ -42,7 +42,7 @@ export class PlantService {
     return collectionData(query(plantsCollection, where('userId', '==', this.auth.currentUser?.uid), orderBy('plantDate', 'desc')), { idField: 'id' });
   }
 
-  getPlantById$(plantId: string): Observable<Plant> {
+  getPlantById$(plantId: string): Observable<Plant | undefined> {
     return docData(doc(this.firestore, `${PLANTS_COLLECTION_NAME}/${plantId}`).withConverter(plantConverter), { idField: 'id' });
   }
 
