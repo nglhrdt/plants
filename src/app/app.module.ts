@@ -20,7 +20,10 @@ import { LoginComponent } from './components/login/login.component';
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
   ],
-  providers: [AuthGuard],
+  providers: [
+    AuthGuard,
+    { provide: Window, useValue: window }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

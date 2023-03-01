@@ -15,7 +15,9 @@ import { CardComponent } from '../card/card.component';
 export class PlantDetailsComponent {
   plant$: Observable<Plant | undefined>;
 
-  constructor(route: ActivatedRoute, private service: PlantService, private router: Router) {
+  ndfAvailable: boolean = false;
+
+  constructor(route: ActivatedRoute, private service: PlantService, private router: Router, public window: Window) {
     this.plant$ = route.params.pipe(
       map((params) => params['id']),
       mergeMap((plantId) =>
@@ -28,6 +30,8 @@ export class PlantDetailsComponent {
         )
       )
     );
+
+    this.ndfAvailable = "NDEFReader" in window;
   }
 
   delete(plant: Plant): void {
