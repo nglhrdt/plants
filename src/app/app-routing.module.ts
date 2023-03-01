@@ -13,9 +13,13 @@ const routes: Routes = [
   },
   {
     path: 'plants',
-    loadComponent: () => import('./components/plants/plants.component').then((c) => c.PlantsComponent),
     ...canActivate(redirectUnauthorizedToLogin),
+    loadComponent: () => import('./components/plants/plants.component').then(c => c.PlantsComponent),
     children: [
+      {
+        path: '',
+        loadComponent: () => import('./components/plant-list/plant-list.component').then((c) => c.PlantListComponent),
+      },
       {
         path: 'new',
         loadComponent: () => import('./components/create-plant/create-plant.component').then((c) => c.CreatePlantComponent),

@@ -1,7 +1,7 @@
 <app-card>
   <ng-container *ngIf="plant$ | async as plant">
-    <div class="flex justify-between pb-4">
-      <div class="text-xl">{{plant.species}}</div>
+    <div class="flex justify-between pb-4 gap-4">
+      <div class="text-xl overflow-hidden whitespace-nowrap text-ellipsis">{{plant.species}}</div>
       <app-button (click)="delete(plant)"> Delete </app-button>
     </div>
     <div>Plant date: {{plant.plantDate | date : 'short'}}</div>

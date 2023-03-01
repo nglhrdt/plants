@@ -1,20 +1,13 @@
-<app-card>
-  <div class="flex pb-4">
-    <app-button routerLink="/plants/new">New Plant</app-button>
-  </div>
+<ng-container *ngIf="plants$ | async as plants">
+  <ul *ngIf="plants.length; else noPlants" class="grid gap-4 md:w-1/2 mx-auto">
+    <li
+      *ngFor="let plant of plants"
+      class="cursor-pointer px-4 py-2 rounded bg-primary overflow-hidden"
+      routerLink="/plants/{{ plant.id }}"
+    >
+      <div class="whitespace-nowrap overflow-hidden text-ellipsis">{{ plant.species }}</div>
+    </li>
+  </ul>
+</ng-container>
 
-  <ng-container *ngIf="plants$ | async as plants">
-    <ul *ngIf="plants.length; else noPlants">
-      <li
-        *ngFor="let plant of plants"
-        class="cursor-pointer px-2 py-1 rounded"
-        routerLink="/plants/{{ plant.id }}"
-        routerLinkActive="bg-primary-dark"
-      >
-        {{ plant.species }} - {{ plant.plantDate | date : "shortDate" }}
-      </li>
-    </ul>
-  </ng-container>
-
-  <ng-template #noPlants>Create Plants to begin</ng-template>
-</app-card>
+<ng-template #noPlants>Create Plants to begin</ng-template>
